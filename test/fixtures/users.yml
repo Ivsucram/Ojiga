@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  nick: MyString
+  email: MyString
+  birthday: 2014-03-20
+  picture: MyString
+  isTermConditionsChecked: false
+
+two:
+  name: MyString
+  nick: MyString
+  email: MyString
+  birthday: 2014-03-20
+  picture: MyString
+  isTermConditionsChecked: false
