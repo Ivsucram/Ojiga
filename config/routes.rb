@@ -1,4 +1,6 @@
 Ojiga::Application.routes.draw do
+  resources :feedbacks
+
   resources :posts
 
   resources :categories
