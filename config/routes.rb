@@ -3,8 +3,6 @@ Ojiga::Application.routes.draw do
 
   resources :achievements
 
-  resources :feedbacks
-
   resources :posts
 
   resources :categories
