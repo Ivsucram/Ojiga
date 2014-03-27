@@ -1,0 +1,29 @@
+<h1>Listing feedback_users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Grade</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @feedback_users.each do |feedback_user| %>
+      <tr>
+        <td><%= feedback_user.grade %></td>
+        <td><%= feedback_user.description %></td>
+        <td><%= link_to 'Show', feedback_user %></td>
+        <td><%= link_to 'Edit', edit_feedback_user_path(feedback_user) %></td>
+        <td><%= link_to 'Destroy', feedback_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Feedback user', new_feedback_user_path %>

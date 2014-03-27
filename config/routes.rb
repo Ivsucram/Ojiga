@@ -1,4 +1,6 @@
 Ojiga::Application.routes.draw do
+  resources :feedback_users
+
   resources :feedback_items
 
   resources :logs
