@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Grade:</strong>
+  <%= @feedback_item.grade %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @feedback_item.description %>
+</p>
+
+<%= link_to 'Edit', edit_feedback_item_path(@feedback_item) %> |
+<%= link_to 'Back', feedback_items_path %>

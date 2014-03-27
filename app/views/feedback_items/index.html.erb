@@ -1,0 +1,29 @@
+<h1>Listing feedback_items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Grade</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @feedback_items.each do |feedback_item| %>
+      <tr>
+        <td><%= feedback_item.grade %></td>
+        <td><%= feedback_item.description %></td>
+        <td><%= link_to 'Show', feedback_item %></td>
+        <td><%= link_to 'Edit', edit_feedback_item_path(feedback_item) %></td>
+        <td><%= link_to 'Destroy', feedback_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Feedback item', new_feedback_item_path %>
