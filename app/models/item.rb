@@ -23,9 +23,9 @@ class Item < ActiveRecord::Base
 				presence: false
 	validates :maximumRentingTime,
 				presence: false
-	t.double :totalValue,
+	validates :totalValue,
 				numericality: { greather_than: 0 }
-	t.boolean :isAvailable,
+	validates :isAvailable,
 				inclusion: { in: [true, false] }
 
 end

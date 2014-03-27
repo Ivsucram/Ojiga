@@ -4,9 +4,7 @@ good_one:
   name: MyGoodName
   nick: MyGoodNick
   email: MyGoodEmail@email.com
-  email_confirmation: MyGoodEmail@email.com
   password: MyGoodPassword
-  password_confirmation: MyGoodPassword
   birthday: <%= Date.today -1 %>
   picture: MyGoodPicturePath
   isTermConditionsChecked: true
@@ -15,9 +13,7 @@ good_two:
   name: MyGoodNameTwo
   nick: MyGoodNickTwo
   email: MyGoodEmailTwo@email.com
-  email_confirmation: MyGoodEmailTwo@email.com
   password: MyGoodPasswordTwo
-  password_confirmation: MyGoodPasswordTwo
   birthday: <%= Date.today -1 %>
   picture: MyGoodPicturePathTwo
   isTermConditionsChecked: true

@@ -5,7 +5,7 @@ class CreateFeedbackItems < ActiveRecord::Migration
       t.integer :item_id
 
       t.integer :grade
-      t.test :description
+      t.text :description
 
       t.timestamps
     end

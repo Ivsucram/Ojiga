@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 				uniqueness: true,
 				length: { maximum: 16, too_long: 'Maximum is %{count} characters' }
 	validates :email,
-				presense: true,
+				presence: true,
 				uniqueness: true,
 				confirmation: true,
 				length: { maximum: 100, too_long: 'Maximum is %{count} characters' }
@@ -37,14 +37,11 @@ class User < ActiveRecord::Base
 
 	after_validation :downcase_email
 
-	
-
-
 	private
 
 	def feedbacks_received=(array)
 		array.each do |fb|
-			if !(fb.is_a? FeedbackUser) return end
+			if !fb.is_a? FeedbackUser then return nil end
 		end
 		array.aech do |fb|
 			fb.target << self
@@ -53,7 +50,7 @@ class User < ActiveRecord::Base
 
 	def feedbacks_sent=(array)
 		array.each do |fb|
-			if !(fb.is_a? FeedbackUser) return end
+			if !fb.is_a? FeedbackUser then return nil end
 		end
 		array.aech do |fb|
 			fb.owner << self
@@ -61,20 +58,18 @@ class User < ActiveRecord::Base
 	end
 
 	def cannot_be_future_date
-		if birthday != nil && birthday is_a? Date
+		if !birthday.nil? and birthday.is_a? Date then
 			errors.add(:birthday, 'can not be future date') if birthday > Date.today
 		end
 	end
 
 	def downcase_email
-		if email != nil
-			email = email.downcase
+		if !email.nil? and email.is_a? String then
+			email.downcase!
 		end
-		if email_confirmation != nil
-			email_confirmation = email_confirmation.downcase
+		if !email_confirmation.nil? and email_confirmation.is_a? String then
+			email_confirmation.downcase!
 		end
-	end
-
 	end
 
 end

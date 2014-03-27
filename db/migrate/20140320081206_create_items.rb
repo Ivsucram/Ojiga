@@ -7,11 +7,11 @@ class CreateItems < ActiveRecord::Migration
       t.string :name
       t.string :picture
       t.text :description
-      t.double :rentUnitPrice
+      t.decimal :rentUnitPrice
       t.time :unitTime
       t.time :minimumRentingTime
       t.time :maximumRentingTime
-      t.double :totalValue
+      t.decimal :totalValue
       t.boolean :isAvailable
 
       t.timestamps
