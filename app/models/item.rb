@@ -5,4 +5,27 @@ class Item < ActiveRecord::Base
 
 	belongs_to :user
 	belongs_to :category
+
+#TODO: REGEX for name
+	validates :name,
+				presence: true,
+				length: { maximum: 100, too_long: 'Maximum is %{count} characters '}
+	validates :picture,
+				presence: true
+	validates :description,
+				presence: true
+	validates :rentUnitPrice,
+				numericality: { greather_than: 0 }
+#TODO: Research how to insert periods of time, not the time ( hour ) itself
+	validates :unitTime,
+				presence: true
+	validates :minimumRentingTime,
+				presence: false
+	validates :maximumRentingTime,
+				presence: false
+	t.double :totalValue,
+				numericality: { greather_than: 0 }
+	t.boolean :isAvailable,
+				inclusion: { in: [true, false] }
+
 end

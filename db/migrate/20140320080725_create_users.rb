@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :nick
       t.string :email
+      t.stirng :password
       t.date :birthday
       t.string :picture
       t.boolean :isTermConditionsChecked
