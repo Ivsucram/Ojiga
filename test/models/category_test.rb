@@ -16,4 +16,11 @@ class CategoryTest < ActiveSupport::TestCase
   	end
   end
 
+  # CRUD R
+  test 'should retrieve' do
+  	assert(Category.first == @category)
+  	category = Category.create(name: 'NameTest')
+  	assert(Category.last == category)
+  end
+
 end
