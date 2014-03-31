@@ -19,10 +19,20 @@ class AchievementTest < ActiveSupport::TestCase
   end
 
   # CRUD R
-  test 'shuold read' do
+  test 'should read' do
   	assert(Achievement.first == @achievement)
   	achievement = Achievement.create(user: @user, name: 'AchievementName2')
   	assert(Achievement.last == achievement)
+  end
+
+  # CRUD U
+  test 'should update' do
+  	achievement = Achievement.create(user: @user, name: 'AchievementNameOld')
+  	assert(achievement.name == 'AchievementNameOld')
+  	achievement.name = 'AchievementNameNew'
+  	achievement.save
+  	assert(!achievement.changed?)
+  	assert(achievement.name == 'AchievementNameNew')
   end
 
 end
