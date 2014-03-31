@@ -39,4 +39,19 @@ class CategoryTest < ActiveSupport::TestCase
   		Category.first.delete
   	end
   end
+
+  test 'validates field name' do
+  	# Validates presence
+  	category = Category.new()
+  	assert !category.save
+
+  	# Validates length
+  	category = Category.new(name: '12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901')
+  	assert !category.save
+
+  	# Validates happy route
+  	assert_difference('Category.count') do
+  		Category.create(name: '1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890')
+  	end
+  end
 end
