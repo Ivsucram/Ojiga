@@ -72,7 +72,25 @@ class UserTest < ActiveSupport::TestCase
     assert_difference('User.count') do
       User.create(name: 'MyNameTest', nick: '123456789012345678901234567890', email: 'MyEmailTest@email.com', password: 'MyPasswordTest', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
     end
+  end
 
+  test 'validates field email' do
+    # Validates presense
+    user = User.new(name: 'MyNameTest', nick: 'MyNickTest', password: 'MyPasswordTest', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    assert !user.save
+
+    # Validates uniqueness
+    user = User.new(name: 'MyNameTest', nick: 'MyNickTest', email: User.first.email, password: 'MyPasswordTest', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    assert !user.save
+
+    # Validates length
+    user = User.new(name: 'MyNameTest', nick: 'MyNickTest', email: '1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901@email.com', password: 'MyPasswordTest', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    assert !user.save
+
+    # Validates happy route
+    assert_difference('User.count') do
+      User.create(name: 'MyNameTest', nick: 'MyNickTest', email: '123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890@email.com', password: 'MyPasswordTest', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    end
   end
 
 end
