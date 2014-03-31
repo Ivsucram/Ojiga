@@ -16,4 +16,21 @@ class UserTest < ActiveSupport::TestCase
   	end
   end
 
+  # CRUD R
+  test 'should read' do
+    assert(User.first == @user, 'User.first expected to be good_one from yaml')
+    user = User.create(name: 'MyNameTest2', nick: 'MyNickTest2', email: 'MyEmailTest2@email.com', password: 'MyPasswordTest', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    assert(User.last == user)
+  end
+
+  # CRUD U
+  test 'should update' do
+    user = User.create(name: 'MyNameTest3', nick: 'MyNickTest3', email: 'MyEmailTest3@email.com', password: 'MyPasswordTest', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    assert(user.name == 'MyNameTest3')
+    user.name = 'MyNameTest4'
+    user.save
+    assert(!user.changed?, 'user was not saved')
+    assert(user.name == 'MyNameTest4')
+  end
+
 end
