@@ -108,4 +108,17 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  #TODO validats picture
+
+  test 'validates field birthday' do
+    # Validates presence
+    user = User.new(name: 'MyNameTest', nick: 'MyNickTest', email: 'MyEmailTest@email.com', password: 'MyPasswordTest', picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    assert !user.save
+
+    # Validates happy route
+    assert_difference('User.count') do
+      User.create(name: 'MyNameTest', nick: 'MyNickTest', email: 'MyEmailTest@email.com', password: 'MyPasswordTest', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    end
+  end
+
 end
