@@ -108,7 +108,7 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  #TODO validats picture
+  #TODO validates field picture
 
   test 'validates field birthday' do
     # Validates presence
@@ -119,6 +119,13 @@ class UserTest < ActiveSupport::TestCase
     assert_difference('User.count') do
       User.create(name: 'MyNameTest', nick: 'MyNickTest', email: 'MyEmailTest@email.com', password: 'MyPasswordTest', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
     end
+  end
+
+  #TODO validates field isTermConditionsChecked
+
+  test 'validates cannot_be_future_date' do
+    user = User.new(name: 'MyNameTest', nick: 'MyNickTest', email: 'MyEmailTest@email.com', password: 'MyPasswordTest', birthday: Date.today+1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    assert !user.save
   end
 
 end
