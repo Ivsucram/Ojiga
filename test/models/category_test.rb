@@ -23,4 +23,14 @@ class CategoryTest < ActiveSupport::TestCase
   	assert(Category.last == category)
   end
 
+  # CRUD U
+  test 'should update' do
+  	category = Category.create(name: 'CategoryNameOld')
+  	assert(category.name == 'CategoryNameOld')
+  	category.name = 'CategoryNameNew'
+  	category.save
+  	assert(!category.changed?)
+  	assert(category.name == 'CategoryNameNew')
+  end
+
 end
