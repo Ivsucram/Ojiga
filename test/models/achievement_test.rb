@@ -6,14 +6,23 @@ class AchievementTest < ActiveSupport::TestCase
   # end
 
   setup do
-  	@achievement = achievements(:one)
+  	@user = users(:good_one)
+  	#TODO Configure the fixture for achievement that load a User from the DB
+  	@achievement = Achievement.create(user: @user, name: 'AchievementName')
   end
 
   # CRUD C
   test 'should create' do
   	assert_difference('Achievement.count') do
-  		Achievement.create(user: users(:good_one), name: 'AchievementName')
+  		Achievement.create(user: @user, name: 'AchievementName')
   	end
+  end
+
+  # CRUD R
+  test 'shuold read' do
+  	assert(Achievement.first == @achievement)
+  	achievement = Achievement.create(user: @user, name: 'AchievementName2')
+  	assert(Achievement.last == achievement)
   end
 
 end
