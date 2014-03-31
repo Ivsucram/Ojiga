@@ -33,4 +33,10 @@ class CategoryTest < ActiveSupport::TestCase
   	assert(category.name == 'CategoryNameNew')
   end
 
+  # CRUD D
+  test 'should delete' do
+  	assert_difference('Category.count', -1) do
+  		Category.first.delete
+  	end
+  end
 end
