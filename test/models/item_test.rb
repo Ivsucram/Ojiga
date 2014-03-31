@@ -18,4 +18,10 @@ class ItemTest < ActiveSupport::TestCase
   	end
   end
 
+  # CRUD R
+  test 'should retrieve' do
+  	assert(Item.first == @item)
+  	item = Item.create(user: @user, category: @category, name: 'ItemName2', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+  	assert(Item.last == item)
+  end
 end
