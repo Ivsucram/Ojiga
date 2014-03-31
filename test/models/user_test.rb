@@ -93,4 +93,19 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test 'validates field password' do
+    # Validates presence
+    user = User.new(name: 'MyNameTest', nick: 'MyNickTest', email: 'MyEmailTest@email.com', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    assert !user.save
+
+    # Validates length
+    user = User.new(name: 'MyNameTest', nick: 'MyNickTest', email: 'MyEmailTest@email.com', password: '123456789012345678901234567890123456789012345678901', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    assert !user.save
+
+    # Validates happy route
+    assert_difference('User.count') do
+      User.create(name: 'MyNameTest', nick: 'MyNickTest', email: 'MyEmailTest@email.com', password: '12345678901234567890123456789012345678901234567890', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+    end
+  end
+
 end
