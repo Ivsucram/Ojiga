@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
 	validates :name,
 				presence: true,
-				length: { maximum: 50, too_long: 'Maximum is %{count} characters' }
+				length: { maximum: 100, too_long: 'Maximum is %{count} characters' }
 	validates :nick,
 				allow_nil: true,
 				uniqueness: true,
