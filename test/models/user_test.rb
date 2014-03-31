@@ -128,4 +128,10 @@ class UserTest < ActiveSupport::TestCase
     assert !user.save
   end
 
+  test 'after validation downcase_email' do
+    assert_difference('User.count') do
+      user = User.create(name: 'MyNameTest', nick: 'MyNickTest', email: 'MyEmailTest@email.com', password: 'MyPasswordTest', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
+      assert(user.email == 'myemailtest@email.com', 'User.create was expected to downcase email')
+    end
+  end
 end
