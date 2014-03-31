@@ -35,4 +35,11 @@ class AchievementTest < ActiveSupport::TestCase
   	assert(achievement.name == 'AchievementNameNew')
   end
 
+  # CRUD D
+  test 'should delete' do
+  	assert_difference('Achievement.count', -1) do
+  		Achievement.first.delete
+  	end
+  end
+
 end
