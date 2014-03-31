@@ -24,4 +24,21 @@ class ItemTest < ActiveSupport::TestCase
   	item = Item.create(user: @user, category: @category, name: 'ItemName2', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
   	assert(Item.last == item)
   end
+
+  # CRUD U
+  test 'should update' do
+  	item = Item.create(user: @user, category: @category, name: 'ItemNameOld', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+  	assert(item.name == 'ItemNameOld')
+  	item.name = 'ItemNameNew'
+  	item.save
+  	assert(!item.changed?, 'item was not saved')
+  	assert(item.name == 'ItemNameNew')
+  end
+
+  # CRUD D
+  test 'should delete' do
+  	assert_difference('Item.count', -1) do
+  		Item.first.delete
+  	end
+  end
 end
