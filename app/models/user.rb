@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 	validates :nick,
 				allow_nil: true,
 				uniqueness: true,
-				length: { maximum: 16, too_long: 'Maximum is %{count} characters' }
+				length: { maximum: 30, too_long: 'Maximum is %{count} characters' }
 	validates :email,
 				presence: true,
 				uniqueness: true,
