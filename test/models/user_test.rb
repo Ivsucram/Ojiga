@@ -33,4 +33,11 @@ class UserTest < ActiveSupport::TestCase
     assert(user.name == 'MyNameTest4')
   end
 
+  # CRUD D
+  test 'should delete' do
+    assert_difference('User.count', -1) do
+      User.first.delete
+    end
+  end
+
 end
