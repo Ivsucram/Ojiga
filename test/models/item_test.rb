@@ -183,6 +183,19 @@ class ItemTest < ActiveSupport::TestCase
   end
 
   test 'validates rentUnitPrice_LessOrEqual_totalValue' do
+    #Validate rentUnitPrice greater than totalValue
+    item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 250.01, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    assert !item.save
+
+    #Validate rentUnitPrice equal totalValue
+    assert_difference('Item.count') do
+      Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 250, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    end
+
+    #Validate rentUnitPrice less than totalValue
+    assert_difference('Item.count') do
+      Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 249.99, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    end
   end
 
 end
