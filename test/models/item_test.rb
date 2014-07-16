@@ -69,12 +69,15 @@ class ItemTest < ActiveSupport::TestCase
   end
 
   test 'validates picture' do
-    # Validatres presence
+    # Validates presence
     item = Item.create(user: @user, category: @category, name: '01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
     assert !item.save
   end
 
   test 'validates description' do
+    # Validates presence
+    item = Item.create(user: @user, category: @category, name: '01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', picture: 'ItemPathForFolderWithPictures', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    assert !item.save
   end
 
   test 'validates description' do
