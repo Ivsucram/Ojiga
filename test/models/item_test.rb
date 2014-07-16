@@ -133,10 +133,36 @@ class ItemTest < ActiveSupport::TestCase
     assert !item.save
   end
 
-  test 'validates isAvailable' do
-  end
+#TODO validates field isAvailable
 
   test 'validates rentUnit_between_minimumRentingTime_and_maximumRentingTime' do
+    day = 24*60*60
+    #Validate rentUnit less than minimumRentingTime
+    item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(day), minimumRentingTime: Time.at(2*day), maximumRentingTime: Time.at(7*day), totalValue: 250, isAvailable: true)
+    assert !item.save
+    item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(2*day-1), minimumRentingTime: Time.at(2*day), maximumRentingTime: Time.at(7*day), totalValue: 250, isAvailable: true)
+    assert !item.save
+
+    #Validate rentUnit greater than maximumRentingTime
+    item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(8*day), minimumRentingTime: Time.at(2*day), maximumRentingTime: Time.at(7*day), totalValue: 250, isAvailable: true)
+    assert !item.save
+    item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(8*day+1), minimumRentingTime: Time.at(2*day), maximumRentingTime: Time.at(7*day), totalValue: 250, isAvailable: true)
+    assert !item.save
+    
+    #Validate rentUnit equal minimumRentingTime
+    assert_difference('Item.count') do
+      item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(2*day), minimumRentingTime: Time.at(2*day), maximumRentingTime: Time.at(7*day), totalValue: 250, isAvailable: true)
+    end
+
+    #Validate rentUnit equal maximumRentingTime
+    assert_difference('Item.count') do
+      item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(7*day), minimumRentingTime: Time.at(2*day), maximumRentingTime: Time.at(7*day), totalValue: 250, isAvailable: true)
+    end
+
+    #Validate rentUnit between minimumRentinTime and maximumRentingTime
+    assert_difference('Item.count') do
+      item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(4*day), minimumRentingTime: Time.at(2*day), maximumRentingTime: Time.at(7*day), totalValue: 250, isAvailable: true)
+    end
   end
 
   test 'validates minimumRentingTime_LessOrEqual_maximumRentingTime' do
