@@ -54,6 +54,18 @@ class ItemTest < ActiveSupport::TestCase
   end
 
   test 'validates name' do
+    # Validates presence
+    item = Item.create(user: @user, category: @category, picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    assert !item.save
+
+    # Validates length
+    item = Item.create(user: @user, category: @category, name: '01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    assert !item.save
+
+    # Validates happy route
+    assert_difference('Item.count') do
+      Item.create(user: @user, category: @category, name: '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    end
   end
 
   test 'validates picture' do
