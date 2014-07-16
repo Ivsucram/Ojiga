@@ -19,6 +19,7 @@ class Item < ActiveRecord::Base
 	validates :description,
 				presence: true
 	validates :rentUnitPrice,
+				presence: true,
 				numericality: { greather_than: 0 }
 #TODO: Research how to insert periods of time, not the time ( hour ) itself
 	validates :unitTime,
