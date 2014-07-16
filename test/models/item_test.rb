@@ -41,4 +41,45 @@ class ItemTest < ActiveSupport::TestCase
   		Item.first.delete
   	end
   end
+
+  test 'validates user' do
+    # Validates presence
+    item = Item.create(category: @category, name: 'ItemName2', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    assert !item.save
+  end
+
+  test 'validates category' do
+    item = Item.create(user: @user, name: 'ItemName2', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    assert !item.save
+  end
+
+  test 'validates name' do
+  end
+
+  test 'validates picture' do
+  end
+
+  test 'validates description' do
+  end
+
+  test 'validates description' do
+  end
+
+  test 'validates rentUnitPrice' do
+  end
+
+  test 'valdiates unitTime' do
+  end
+
+  test 'validates minimumRentingTime' do
+  end
+
+  test 'validates maximumRentingTime' do
+  end
+
+  test 'validates totalValue' do
+  end
+
+  test 'validates isAvailable' do
+  end
 end

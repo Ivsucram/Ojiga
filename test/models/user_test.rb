@@ -17,7 +17,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   # CRUD R
-  test 'should read' do
+  test 'should retrieve' do
     assert(User.first == @user, 'User.first expected to be good_one from yaml')
     user = User.create(name: 'MyNameTest2', nick: 'MyNickTest2', email: 'MyEmailTest2@email.com', password: 'MyPasswordTest', birthday: Date.today-1, picture: 'MyPicturePathTest', isTermConditionsChecked: true)
     assert(User.last == user)
