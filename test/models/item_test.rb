@@ -148,7 +148,7 @@ class ItemTest < ActiveSupport::TestCase
     assert !item.save
     item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(8*day+1), minimumRentingTime: Time.at(2*day), maximumRentingTime: Time.at(7*day), totalValue: 250, isAvailable: true)
     assert !item.save
-    
+
     #Validate rentUnit equal minimumRentingTime
     assert_difference('Item.count') do
       item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(2*day), minimumRentingTime: Time.at(2*day), maximumRentingTime: Time.at(7*day), totalValue: 250, isAvailable: true)
@@ -166,6 +166,20 @@ class ItemTest < ActiveSupport::TestCase
   end
 
   test 'validates minimumRentingTime_LessOrEqual_maximumRentingTime' do
+    day = 24*60*60
+    #Validate minimumRentingTime greater than maximumRentingTime
+    item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(3*day), minimumRentingTime: Time.at(2*day), maximumRentingTime: Time.at(1*day), totalValue: 250, isAvailable: true)
+    assert !item.save
+
+    #Validate minimumRentingTime equal maximumRentingTime
+    assert_difference('Item.count') do
+      Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(day), minimumRentingTime: Time.at(day), maximumRentingTime: Time.at(day), totalValue: 250, isAvailable: true)
+    end
+
+    #Validate minimumRentingTime less than maximumRentingTime
+    assert_difference('Item.count') do
+      Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(day), minimumRentingTime: Time.at(day-1), maximumRentingTime: Time.at(day), totalValue: 250, isAvailable: true)
+    end
   end
 
   test 'validates rentUnitPrice_LessOrEqual_totalValue' do

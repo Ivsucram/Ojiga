@@ -39,7 +39,6 @@ class Item < ActiveRecord::Base
 	validate :custom_validate_numericality
 	validate :rentUnit_between_minimumRentingTime_and_maximumRentingTime
 
-#TODO Validation for unitTime between minimumRentingTime and maximumRentingTime
 #TODO Validation for minimumRentingTime less or equal maximumRentingTime
 #TODO Validation for totalValue is bigger or equal rentUnitPrice
 
@@ -64,6 +63,14 @@ class Item < ActiveRecord::Base
 			end
 			if (unitTime > maximumRentingTime) then
 				errors.add(:unitTime, 'greather than maximum renting price')
+			end
+		end
+	end
+
+	def minimumRentingTime_LessOrEqual_maximumRentingTime
+		if (!minimumRentingTime.nil? and !maximumRentingTime.nil?) then
+			if (minimumRentingTime > maximumRentingTime)
+				errors.add(:minimumRentingTime, 'greater than maximum renting price')
 			end
 		end
 	end
