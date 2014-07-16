@@ -95,6 +95,9 @@ class ItemTest < ActiveSupport::TestCase
   end
 
   test 'valdiates unitTime' do
+    # Validates presence
+    item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    assert !item.save
   end
 
   test 'validates minimumRentingTime' do
@@ -107,5 +110,11 @@ class ItemTest < ActiveSupport::TestCase
   end
 
   test 'validates isAvailable' do
+  end
+
+  test 'validates rentUnit_between_minimumRentingTime_and_maximumRentingTime' do
+  end
+
+  test 'validates minimumRentingTime_LessOrEqual_maximumRentingTime' do
   end
 end
