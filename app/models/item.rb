@@ -20,7 +20,7 @@ class Item < ActiveRecord::Base
 				presence: true
 	validates :rentUnitPrice,
 				presence: true,
-				numericality: { greather_than: 0 }
+				numericality: { greather_than_or_equal_to: 0.01 }
 #Insertion must be made using Time.at(xxx) where xxx is the amount of time in seconds. So xxx = 60*60*24 is one day
 	validates :unitTime,
 				presence: true
@@ -31,11 +31,30 @@ class Item < ActiveRecord::Base
 	validates :maximumRentingTime,
 				presence: false
 	validates :totalValue,
-				numericality: { greather_than: 0 }
+				presence: true,
+				numericality: { greather_than_or_equal_to: 0.01 }
 	validates :isAvailable,
 				inclusion: { in: [true, false] }
 
+	validate :custom_validate_numericality
+
 #TODO Validation for unitTime between minimumRentingTime and maximumRentingTime
 #TODO Validation for minimumRentingTime less or equal maximumRentingTime
+#TODO Validation for totalValue is bigger or equal rentUnitPrice
+
+	private
+
+#TODO In the future take out this custom valdiation and make the numericality standard validation work
+	def custom_validate_numericality
+		minimum = BigDecimal.new('0.01')
+
+		if (!rentUnitPrice.nil? and minimum >= rentUnitPrice) then
+			errors.add(:rentUnitPrice, 'custom_validate_numericality')
+		end
+		if (!totalValue.nil? and minimum >= totalValue) then
+			errors.add(:totalValue, 'custom_validate_numericality')
+		end
+
+	end
 
 end

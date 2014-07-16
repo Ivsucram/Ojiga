@@ -70,32 +70,32 @@ class ItemTest < ActiveSupport::TestCase
 
   test 'validates picture' do
     # Validates presence
-    item = Item.create(user: @user, category: @category, name: '01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    item = Item.create(user: @user, category: @category, name: '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
     assert !item.save
   end
 
   test 'validates description' do
     # Validates presence
-    item = Item.create(user: @user, category: @category, name: '01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', picture: 'ItemPathForFolderWithPictures', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    item = Item.create(user: @user, category: @category, name: '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789', picture: 'ItemPathForFolderWithPictures', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
     assert !item.save
   end
 
   test 'validates rentUnitPrice' do
     # Validates presence
-    item = Item.create(user: @user, category: @category, name: '01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    item = Item.create(user: @user, category: @category, name: '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
     assert !item.save
 
     # Validates lessThanZero
-    item = Item.create(user: @user, category: @category, name: '01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: -1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    item = Item.create(user: @user, category: @category, name: '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: -1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
     assert !item.save
 
     # Validates EqualZero
-    item = Item.create(user: @user, category: @category, name: '01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 0, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
+    item = Item.create(user: @user, category: @category, name: '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 0, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
     assert !item.save
   end
 
   test 'valdiates unitTime' do
-    # Validates presence
+    # Validates presence false
     item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 250, isAvailable: true)
     assert !item.save
   end
@@ -120,6 +120,17 @@ class ItemTest < ActiveSupport::TestCase
   end
 
   test 'validates totalValue' do
+    # Validates presence
+    item = Item.create(user: @user, category: @category, name: 'ItemName', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), isAvailable: true)
+    assert !item.save
+
+    # Validates lessThanZero
+    item = Item.create(user: @user, category: @category, name: '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: -1.0, isAvailable: true)
+    assert !item.save
+
+    # Validates EqualZero
+    item = Item.create(user: @user, category: @category, name: '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789', picture: 'ItemPathForFolderWithPictures', description: 'ItemDescription', rentUnitPrice: 1, unitTime: Time.at(60*60*24), minimumRentingTime: Time.at(60*60*24), maximumRentingTime: Time.at(7*60*60*24), totalValue: 0.0, isAvailable: true)
+    assert !item.save
   end
 
   test 'validates isAvailable' do
@@ -130,4 +141,8 @@ class ItemTest < ActiveSupport::TestCase
 
   test 'validates minimumRentingTime_LessOrEqual_maximumRentingTime' do
   end
+
+  test 'validates rentUnitPrice_LessOrEqual_totalValue' do
+  end
+
 end
